@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class Usuario {
+    private Long id;
     private String nombre;
     private Integer edad;
     private List<Alergia> alergias;
