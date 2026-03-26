@@ -12,6 +12,15 @@ public class UsuarioService {
     public List<Usuario> users = new ArrayList<>();
 
     public String saveUser(Usuario usuario) {
+
+        if (usuario.getNombre().equalsIgnoreCase("joseph")) {
+            throw new RuntimeException("El usuario joseph no puede registrarse");
+        }
+
+        if (usuario.getEdad() < 18) {
+            throw new RuntimeException("El usuario debe ser mayor de edad");
+        }
+
         boolean existe = users.stream()
                 .anyMatch(u -> u.getId().equals(usuario.getId()));
 
@@ -54,5 +63,17 @@ public class UsuarioService {
             }
         }
         throw new RuntimeException("No existe un usuario con el id " + id);
+    }
+
+    public List<Usuario> getUserByNombre(String nombre) {
+        List<Usuario> resultado = users.stream()
+                .filter(u -> u.getNombre().equalsIgnoreCase(nombre))
+                .toList();
+
+        if (resultado.isEmpty()) {
+            throw new RuntimeException("No existe un usuario con el nombre " + nombre);
+        }
+
+        return resultado;
     }
 }

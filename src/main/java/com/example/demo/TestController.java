@@ -55,4 +55,12 @@ public class TestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    @GetMapping("/user/search")
+    public ResponseEntity<?> getUserByNombre(@RequestParam String nombre) {
+        try {
+            return ResponseEntity.ok(userService.getUserByNombre(nombre));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
